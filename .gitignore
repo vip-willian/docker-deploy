@@ -13,6 +13,24 @@ elasticsearch/esdata03/*
 elasticsearch/kibanadata/*
 !elasticsearch/kibanadata/.gitkeep
 
+kafka/kafka-broker-1/data/*
+!kafka/kafka-broker-1/data/.gitkeep
+
+kafka/kafka-broker-2/data/*
+!kafka/kafka-broker-2/data/.gitkeep
+
+kafka/kafka-broker-3/data/*
+!kafka/kafka-broker-3/data/.gitkeep
+
+kafka/kafka-broker-1/logs/*
+!kafka/kafka-broker-1/logs/.gitkeep
+
+kafka/kafka-broker-2/logs/*
+!kafka/kafka-broker-2/logs/.gitkeep
+
+kafka/kafka-broker-3/logs/*
+!kafka/kafka-broker-3/logs/.gitkeep
+
 mysql8/data/*
 !mysql8/data/.gitkeep
 

@@ -1,0 +1,49 @@
+services:
+  kafka-broker-1:
+    image: bitnami/kafka:3.1.2
+    # restart: always
+    container_name: kafka-broker-1
+    ports:
+      - 9092:9092
+    networks:
+      - kafka-network
+    environment:
+      - ALLOW_PLAINTEXT_LISTENER=yes  
+    volumes:
+      - ./kafka-broker-1/logs:/opt/bitnami/kafka/logs
+      - ./kafka-broker-1/data:/bitnami/kafka/data
+      - ./kafka-broker-1/server.properties:/bitnami/kafka/config/server.properties
+
+  kafka-broker-2:
+    image: bitnami/kafka:3.1.2
+    # restart: always
+    container_name: kafka-broker-2
+    ports:
+      - 9093:9093
+    networks:
+      - kafka-network
+    environment:
+      - ALLOW_PLAINTEXT_LISTENER=yes  
+    volumes:
+      - ./kafka-broker-2/logs:/opt/bitnami/kafka/logs
+      - ./kafka-broker-2/data:/bitnami/kafka/data
+      - ./kafka-broker-2/server.properties:/bitnami/kafka/config/server.properties 
+
+  kafka-broker-3:
+    image: bitnami/kafka:3.1.2
+    # restart: always
+    container_name: kafka-broker-3
+    ports:
+      - 9094:9094
+    networks:
+      - kafka-network
+    environment:
+      - ALLOW_PLAINTEXT_LISTENER=yes        
+    volumes:
+      - ./kafka-broker-3/logs:/opt/bitnami/kafka/logs
+      - ./kafka-broker-3/data:/bitnami/kafka/data
+      - ./kafka-broker-3/server.properties:/bitnami/kafka/config/server.properties
+
+networks:
+  kafka-network:
+    external: true    
