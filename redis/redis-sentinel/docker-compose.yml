@@ -1,0 +1,78 @@
+services:
+  # 主从集群
+  redis-master:
+    image: redis
+    container_name: redis-master
+    # restart: always
+    ports:
+      - 6379:6379
+    networks:
+      redis-network:
+        ipv4_address: 172.19.0.10
+    volumes:
+      - ./master:/usr/local/etc/redis:rw
+    command: redis-server /usr/local/etc/redis/redis.conf
+  redis-slave-1:
+    image: redis
+    container_name: redis-slave-1
+    # restart: always
+    ports:
+      - 6380:6379
+    networks:
+      redis-network:
+        ipv4_address: 172.19.0.11 
+    volumes:
+      - ./slave1:/usr/local/etc/redis:rw
+    command: redis-server /usr/local/etc/redis/redis.conf
+  redis-slave-2:
+    image: redis
+    container_name: redis-slave-2
+    # restart: always
+    ports:
+      - 6381:6379
+    networks:
+      redis-network:
+        ipv4_address: 172.19.0.12
+    volumes:
+      - ./slave2:/usr/local/etc/redis:rw
+    command: redis-server /usr/local/etc/redis/redis.conf
+  # 哨兵集群
+  redis-sentinel-1:
+    image: redis
+    container_name: redis-sentinel-1
+    # restart: always
+    ports:
+      - 26379:26379
+    networks:
+      redis-network:
+        ipv4_address: 172.19.0.14
+    volumes:
+      - ./sentinel1:/usr/local/etc/redis:rw
+    command: redis-server /usr/local/etc/redis/sentinel.conf --sentinel
+  redis-sentinel-2:
+    image: redis
+    container_name: redis-sentinel-2
+    # restart: always
+    ports:
+      - 26380:26379
+    networks:
+      redis-network:
+        ipv4_address: 172.19.0.15
+    volumes:
+      - ./sentinel2:/usr/local/etc/redis:rw
+    command: redis-server /usr/local/etc/redis/sentinel.conf --sentinel
+  redis-sentinel-3:
+    image: redis
+    container_name: redis-sentinel-3
+    # restart: always
+    ports:
+      - 26381:26379
+    networks:
+      redis-network:
+        ipv4_address: 172.19.0.16
+    volumes:
+      - ./sentinel3:/usr/local/etc/redis:rw
+    command: redis-server /usr/local/etc/redis/sentinel.conf --sentinel
+networks:
+  redis-network:
+    external: true     

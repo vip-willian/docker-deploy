@@ -1,0 +1,56 @@
+services:
+  seata1:
+    image: seataio/seata-server:1.6.1
+    container_name: seata1
+    # restart: always
+    ports:
+      - 7091:7091
+      - 8091:8091
+    environment:
+      - SEATA_IP=192.168.31.136
+      - SEATA_PORT=8091
+      # 服务节点
+      - SERVER_NODE=1
+    volumes:
+      - ./server1/application.yml:/seata-server/resources/application.yml
+    networks:
+      - seata-network
+ 
+  seata2:
+    image: seataio/seata-server:1.6.1
+    container_name: seata2
+    # restart: always
+    ports:
+      - 7092:7092
+      - 8092:8092
+    environment:
+      - SEATA_IP=192.168.31.136
+      - SEATA_PORT=8092
+      # 服务节点
+      - SERVER_NODE=2
+    volumes:
+      - ./server2/application.yml:/seata-server/resources/application.yml
+    networks:
+      - seata-network
+ 
+  seata3:
+    image: seataio/seata-server:1.6.1
+    container_name: seata3
+    # restart: always
+    ports:
+      - 7093:7093
+      - 8093:8093
+    environment:
+      - SEATA_IP=192.168.31.136
+      - SEATA_PORT=8093
+      # 服务节点
+      - SERVER_NODE=3
+    volumes:
+      - ./server3/application.yml:/seata-server/resources/application.yml
+    networks:
+      - seata-network
+ 
+ # 网络配置
+networks:
+  seata-network:
+    external: true
